@@ -52,3 +52,11 @@ print(x.size)
 print(y.size)
 
 draw(x, y)
+
+x_train, y_train, x_val, y_val = data_maker1.separate_set(x, y, 0.8)
+print(x_train.size,
+      y_train.size,
+      x_val.size,
+      y_val.size)
+
+draw(x_train, y_train)

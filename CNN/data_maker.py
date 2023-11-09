@@ -10,7 +10,7 @@ class data():
         return x, y
 
     def separate_set(self, x , y, percentage):
-        NumberofTrain = self.NumberofInput * percentage
+        NumberofTrain = int(self.NumberofInput * percentage)
         index = np.arange(self.NumberofInput)
         np.random.shuffle(index)
         index_group1 = index[:NumberofTrain]
