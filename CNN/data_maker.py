@@ -8,3 +8,14 @@ class data():
         x = np.random.uniform(-200, 150, (self.NumberofInput, 1))
         y = func(x, self.NumberofInput)
         return x, y
+
+    def separate_set(self, x , y, percentage):
+        NumberofTrain = self.NumberofInput * percentage
+        index = np.arange(self.NumberofInput)
+        np.random.shuffle(index)
+        index_group1 = index[:NumberofTrain]
+        index_group2 = index[NumberofTrain:]
+        x_train, y_train = x[index_group1], y[index_group1]
+        x_val, y_val = x[index_group2], y[index_group2]
+        return x_train, y_train, x_val, y_val
+
