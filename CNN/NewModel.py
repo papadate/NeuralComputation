@@ -51,7 +51,6 @@ x, y = data_maker1.gen_data(myfun)
 print(x.size)
 print(y.size)
 
-draw_scatter(x, y)
 
 x_train, y_train, x_val, y_val = data_maker1.separate_set(x, y, 0.8)
 print(x_train.size,
@@ -59,4 +58,10 @@ print(x_train.size,
       x_val.size,
       y_val.size)
 
-draw_scatter(x_train, y_train)
+# draw_scatter(x, y)
+# draw_scatter(x_train, y_train)
+
+xt_torch = data_maker1.toTorch(x_train)
+yt_torch = data_maker1.toTorch(y_train)
+xv_torch = data_maker1.toTorch(x_val)
+yv_torch = data_maker1.toTorch(y_val)

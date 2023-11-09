@@ -1,4 +1,7 @@
 import numpy as np
+import torch
+
+
 class data():
     def __init__(self, NumberofInput):
         self.NumberofInput = NumberofInput
@@ -19,3 +22,6 @@ class data():
         x_val, y_val = x[index_group2], y[index_group2]
         return x_train, y_train, x_val, y_val
 
+    def toTorch(self, set):
+        torchSet = torch.from_numpy(set).float()
+        return torchSet
