@@ -13,10 +13,9 @@ class SimpleModel(nn.Module):
         self.a = nn.Parameter(torch.randn(1).float())
         self.b = nn.Parameter(torch.randn(1).float())
 
-    # 设置向前传播的函数， 你实际上不需调用他
+        # 设置向前传播的函数， 你实际上不需调用他
     def forward(self, x):
-        return self.a + (self.b * x)
-
+        return self.a + self.b * x
 
 print("所以，当你有一个模型实例 model 时，"
       "你可以直接将输入数据传递给模型，"
@@ -46,8 +45,8 @@ np.random.shuffle(index)
 print(index)
 
 # 分割数据集
-train_index = index[:80] # 从 0 - 79
-validation_index = index[80:] # 从 79 - 99
+train_index = index[:80]  # 从 0 - 79
+validation_index = index[80:]  # 从 79 - 99
 
 # 分配数据到 训练集 和 验证集
 x_train = x[train_index]
@@ -57,11 +56,16 @@ x_val = x[validation_index]
 y_val = y[validation_index]
 print("验证集数量x-{}, y-{}".format(x_val.size, y_val.size))
 
-# 转化numpy矩阵 到 torch 矩阵
+# # 转化numpy矩阵 到 torch 矩阵
 x_train_torch = torch.from_numpy(x_train).float()
-y_train_torch = torch.from_numpy(x_train).float()
-x_val_torch = torch.from_numpy(x_val)
-y_val_torch = torch.from_numpy(y_val)
+y_train_torch = torch.from_numpy(y_train).float()
+x_val_torch = torch.from_numpy(x_val).float()
+y_val_torch = torch.from_numpy(y_val).float()
+# x_train_torch = torch.from_numpy(x_train).float()
+# y_train_torch = torch.from_numpy(y_train).float()
+#
+# x_val_torch = torch.from_numpy(x_val).float()
+# y_val_torch = torch.from_numpy(y_val).float()
 
 # 画图：
 # 创建一张图，1行两列（同一行里2张图）
@@ -87,7 +91,7 @@ print("参数 训练之前：\n {}".format(model.state_dict()))
 
 # 设置超参数：
 learning_rate = 1e-1  # 0.1
-epochs = 100  # 训练数据循环次数
+epochs = 1000  # 训练数据循环次数
 loss_fn = nn.MSELoss(reduction='mean')
 # 损失函数 MSE 用均值
 optimiser = optim.SGD(model.parameters(), lr=learning_rate)
@@ -103,11 +107,39 @@ for epoch in range(epochs):
     y_prediction = model(x_train_torch.to(device))
     # 通过定义好的损失函数来计算损失 你的标准答案和模型预测值
     loss = loss_fn(y_train_torch.to(device), y_prediction)
-    # print(loss)
+    print("第{}次 : loss -> {}".format(epoch, loss))
     # 利用loss进行反向传播
     loss.backward()
     # 之前定义的优化方法，step() 开始利用梯度和学习率去更新参数
     optimiser.step()
     # print(model.state_dict())
 
-print("After Training, the parameter will be: \n {}". format(model.state_dict()))
+# # set learning rate
+# lr = 1e-1
+#
+# # set number of epochs, i.e., number of times we iterate through the training set
+# epochs = 100
+#
+# # We use mean square error (MSELoss)
+# loss_fn = nn.MSELoss(reduction='mean')
+#
+# # We also use stochastic gradient descent (SGD) to update a and b
+# optimiser = optim.SGD(model.parameters(), lr=lr)
+#
+# for epoch in range(epochs):
+#     model.train()  # set the model to training mode
+#     optimiser.zero_grad()  # avoid accumulating gradients
+#     y_pred = model(x_train_torch.to(device))
+#     loss = loss_fn(y_train_torch.to(device), y_pred)
+#     loss.backward()  # calculate gradients
+#     optimiser.step()  # updates model's params
+#
+print("参数训练完: \n", model.state_dict())
+
+y_final = model(x_train_torch.to(device))
+y_finalnp = y_final.detach().cpu().numpy()
+y_val_final = model(x_val_torch.to(device))
+y_finalval = y_val_final.detach().cpu().numpy()
+axs[0].plot(x_train, y_finalnp, label='test', color='red')
+axs[1].plot(x_val, y_finalval, label='val', color='purple')
+plt.show()
