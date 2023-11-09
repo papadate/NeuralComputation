@@ -39,7 +39,7 @@ def myfun(x, NumberofInput):
 
 
 # 画图函数
-def draw(x, y):
+def draw_scatter(x, y):
     plt.scatter(x, y)
     plt.grid(True)
     plt.show()
@@ -51,7 +51,7 @@ x, y = data_maker1.gen_data(myfun)
 print(x.size)
 print(y.size)
 
-draw(x, y)
+draw_scatter(x, y)
 
 x_train, y_train, x_val, y_val = data_maker1.separate_set(x, y, 0.8)
 print(x_train.size,
@@ -59,4 +59,4 @@ print(x_train.size,
       x_val.size,
       y_val.size)
 
-draw(x_train, y_train)
+draw_scatter(x_train, y_train)
