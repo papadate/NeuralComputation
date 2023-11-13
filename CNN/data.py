@@ -1,7 +1,7 @@
 import random
-
 import torch
 import numpy as np
+from torch.utils.data import TensorDataset, DataLoader
 
 
 def mac_device_check():
@@ -41,3 +41,24 @@ def func_linear(x):
         y_train[sample_index] = np.dot(x[sample_index], weight) + bias + noise
 
     return y_train
+
+
+def gen_dataloader(x_train, y_train):
+    x_train_tensor = torch.tensor(x_train)
+    y_train_tensor = torch.tensor(y_train)
+    '''
+    after we get the dataset, we may use mini-batch to improve the performance
+    DataLoader can do this
+    DataLoader(dataset=some_dataset,
+               batch_size=some_number,
+               shuffle=True/False)
+               # shuffle - 是否打乱
+    how to establish an instance of dataset
+    use TensorDataset !!!
+    TensorDataset(x_train(tensor_version), y_train(tensor_version))                      
+    '''
+    dataset = TensorDataset(x_train_tensor, y_train_tensor)
+    train_loader = DataLoader(dataset=dataset,
+                              batch_size=16,
+                              shuffle=True)
+    return train_loader

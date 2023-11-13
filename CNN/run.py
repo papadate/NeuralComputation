@@ -28,6 +28,19 @@ x_train, y_train = data.gen_data(size, dimension, data.func_linear)
 # plt.grid(True)
 # plt.show()
 
+'''
+after we get the dataset, we may use mini-batch to improve the performance
+DataLoader can do this
+DataLoader(dataset=some_dataset,
+           batch_size=some_number,
+           shuffle=True/False)
+           # shuffle - 是否打乱
+how to establish an instance of dataset
+use TensorDataset !!!
+TensorDataset(x_train(tensor_version), y_train(tensor_version))                      
+'''
+train_loader = data.gen_dataloader(x_train, y_train)
+
 # hyperparameter setting
 # learning rate
 lr = 1e-1  # 0.1
@@ -44,3 +57,7 @@ optimiser = optim.SGD(model.parameters(), lr=lr)
 
 print("优化前：")
 data.print_parameters(model)
+
+print("开始训练：")
+for epoch in range(epochs)
+    model.train()
