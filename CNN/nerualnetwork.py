@@ -53,7 +53,7 @@ for j in range(K):
     # 对 ix 数据 进行分类
     y[ix] = j
 
-plt.scatter(X[:, 0], X[:, 1], c=y, s=20, cmap=plt.cm.Spectral)
+# plt.scatter(X[:, 0], X[:, 1], c=y, s=20, cmap=plt.cm.Spectral)
 
 """
 生成数据代码段 - 结束
@@ -85,14 +85,52 @@ classifier = Model.nnModel()
 optimiser = optim.SGD(classifier.parameters(), lr=0.01, momentum=0.9)
 batch_size = 1600
 
+output = []
+
 for i in range(1000):
     choice = np.random.choice(sample_size, batch_size, replace=False)
     X_bychoice = X_tensor[0, choice, :]
     labels_bychoice = labels[0, choice]
-    output = classifier(X_bychoice)
+    output = classifier(X_bychoice.float())
     loss = loss_fn(output, labels_bychoice.long())
     optimiser.zero_grad()
     loss.backward()
     if i % 100 == 0:
         print(loss)
     optimiser.step()
+
+print("训练完成")
+prediction = output.max(1)[1]
+print(prediction)
+
+
+
+h = 0.02
+x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
+                     np.arange(y_min, y_max, h))
+
+## ground truth show
+fig = plt.figure()
+plt.scatter(X[:, 0], X[:, 1], c=y, s=40, cmap=plt.cm.Spectral)
+plt.xlim(xx.min(), xx.max())
+plt.ylim(yy.min(), yy.max())
+
+## prediction show
+fig = plt.figure()
+
+plt.scatter(X[choice, 0], X[choice, 1], c=prediction.numpy(), s=40, cmap=plt.cm.Spectral)
+plt.xlim(xx.min(), xx.max())
+plt.ylim(yy.min(), yy.max())
+
+plt.show()
+
+## The accuracy
+
+predicted_results = prediction.numpy()
+ground_truth = y[choice]
+
+acc = np.mean(predicted_results==ground_truth)
+
+print ('training accuracy: ', acc)
