@@ -45,10 +45,28 @@ model = Model.LinearModel().to(device)
 loss_func = nn.MSELoss(reduction='mean')
 optimiser = optim.SGD(model.parameters(), lr=lr)
 
+def generic_code(model, loss_fn, optimiser):
+
+    # define a function inside another function
+    def train_step(x_batch, y_batch):
+        optimiser.zero_grad()
+        y_pred = model(x_batch)   # forward pass
+        loss = loss_fn(y_batch, y_pred)  # calculate loss value
+        loss.backward()                # autograd
+        optimiser.step()               # update parameters
+        return loss.item()             # return the loss
+
+    # return the newly defined function
+    return train_step                # return a function
+
 print("优化前：")
 data.print_parameters(model)
 
 print("开始训练：")
+train_step = generic_code(model, loss_func, optimiser)
+# x_train_tensor = x_train_tensor.to(device)
+# y_train_tensor = y_train_tensor.to(device)
+losses = list()
 for epoch in range(epochs):
     # modify the model to training mode
     model.train()
@@ -57,17 +75,19 @@ for epoch in range(epochs):
     train_loader is an instance
     we established in the past
     '''
+
     for x_batch, y_batch in train_loader:
-        # 注意 此时 batch的运算已经在GPU上了
-        x_batch = x_batch.to(device)
-        y_batch = y_batch.to(device)
-        # clean the gradient list
-        optimiser.zero_grad()
-        # calculate prediction values
-        y_pred = model(x_batch)
-        loss = loss_func(y_batch, y_pred)
-        loss.backward()
-        optimiser.step()
+        # # 注意 此时 batch的运算已经在GPU上了
+        # x_batch = x_batch.to(device)
+        # y_batch = y_batch.to(device)
+        # # clean the gradient list
+        # optimiser.zero_grad()
+        # # calculate prediction values
+        # y_pred = model(x_batch)
+        # loss = loss_func(y_batch, y_pred)
+        # loss.backward()
+        # optimiser.step()
+        losses.append(train_step(x_batch.to(device), y_batch.to(device)))
 
 print("优化后：")
 data.print_parameters(model)
@@ -77,9 +97,15 @@ drawing section starts
 """
 model.eval()
 y = model(x_train_tensor.to(device)).detach().to('cpu').numpy()
-plt.plot(x_train, y)
-plt.scatter(x_train, y_train)
-plt.xlabel('x')
-plt.ylabel('prediction')
-plt.grid(True)
+# plt.plot(x_train, y)
+# plt.scatter(x_train, y_train)
+# plt.xlabel('x')
+# plt.ylabel('prediction')
+# plt.grid(True)
+# plt.show()
+
+plt.plot(range(len(losses)), losses, label="Training loss")
+plt.xlabel("Training iterations")
+plt.ylabel("Loss")
+plt.legend()
 plt.show()
