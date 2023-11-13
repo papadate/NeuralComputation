@@ -1,6 +1,7 @@
 import numpy as np
 import math
 import matplotlib.pyplot as plt
+import torch
 
 """
 生成数据代码段 - 开始
@@ -63,3 +64,16 @@ plt.scatter(X[:, 0], X[:, 1], c=y, s=20, cmap=plt.cm.Spectral)
 """
 
 import Model
+
+"""
+准备数据
+xx.unsqueeze() 升高维度
+"""
+X_tensor = torch.tensor(X)
+sample_size = X_tensor.shape[0]
+X_tensor = X_tensor.unsqueeze(0)
+labels = y
+labels = torch.Tensor(labels)
+labels = labels.unsqueeze(0)
+
+
