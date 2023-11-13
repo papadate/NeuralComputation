@@ -1,5 +1,6 @@
 import Model
 import data
+import matplotlib.pyplot as plt
 
 # check availability of GPU on your device
 device = data.mac_device_check()
@@ -17,11 +18,11 @@ data.print_parameters(model)
 # generate sample data
 # (size, dimension, func)
 size = 100
-dimension = 2
+dimension = 1
 x_train, y_train = data.gen_data(size, dimension, data.func_linear)
 
-print("样本X是：")
-print(x_train)
-print("样本Y是：")
-print(y_train)
-
+# plt.scatter(x_train, y_train)
+# plt.xlabel("x")
+# plt.ylabel("y")
+# plt.grid(True)
+# plt.show()
