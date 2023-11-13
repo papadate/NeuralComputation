@@ -22,5 +22,12 @@ for j in range(K):
     j = 1
     range N -> 2N
     j = 2
+    range 2N -> 3N
+    j = 3
+    range 3N -> 4N
     """
     ix = range(N * j, N * (j + 1))
+    """
+    
+    """
+    r = np.linspace(0.0, 1, N)
