@@ -14,4 +14,14 @@ model = Model.LinearModel().to(device)
 # print your model parameters
 data.print_parameters(model)
 
+# generate sample data
+# (size, dimension, func)
+size = 100
+dimension = 2
+x_train, y_train = data.gen_data(size, dimension, data.func_linear)
+
+print("样本X是：")
+print(x_train)
+print("样本Y是：")
+print(y_train)
 

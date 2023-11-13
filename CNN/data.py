@@ -1,4 +1,7 @@
+import random
+
 import torch
+import numpy as np
 
 
 def mac_device_check():
@@ -17,5 +20,24 @@ def print_parameters(model):
         print(name, ': ', weight)
 
 
-def gen_data():
-    return None
+def gen_data(size, dimension, func):
+    x_train = np.random.rand(size, dimension)*10
+    y_train = func(x_train)
+    return x_train, y_train
+
+
+def func_linear(x):
+    # initialize the weight & bias
+    number_of_samples, dimension = x.shape
+    weight = np.zeros(dimension)
+    for idx in range(dimension):
+        weight[idx] = np.random.randint(1, 10)
+    print(weight)
+    bias = random.randint(2, 10)
+
+    # calculate every sample's target value y
+    y_train = np.zeros((number_of_samples, 1))
+    for sample_index in range(number_of_samples):
+        y_train[sample_index] = np.dot(x[sample_index], weight) + bias
+
+    return y_train
