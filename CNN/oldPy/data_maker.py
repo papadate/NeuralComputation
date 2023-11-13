@@ -2,7 +2,7 @@ import numpy as np
 import torch
 
 
-class data():
+class data:
     def __init__(self, NumberofInput):
         self.NumberofInput = NumberofInput
 
