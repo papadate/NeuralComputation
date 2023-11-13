@@ -14,7 +14,7 @@ when model instance established, 'require_grad' automatically True
 model = Model.LinearModel().to(device)
 
 # print your model parameters
-data.print_parameters(model)
+# data.print_parameters(model)
 
 # generate sample data
 # (size, dimension, func)
@@ -36,8 +36,11 @@ epochs = 100  # 100 times iteration
 '''
 mean square error as loss function
 reduction based on the mean
+mean - divide the sum of all loss by the number of samples
 '''
-
 loss_fn = Model.nn.MSELoss(reduction='mean')
+# set up the optimiser
+optimiser = optim.SGD(model.parameters(), lr=lr)
 
-
+print("优化前：")
+data.print_parameters(model)
