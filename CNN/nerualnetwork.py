@@ -2,6 +2,9 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 
+"""
+生成数据代码段 - 开始
+"""
 N = 400  # number of points per class
 D = 2  # dimension
 K = 4  # number of class
@@ -50,4 +53,8 @@ for j in range(K):
     y[ix] = j
 
 plt.scatter(X[:, 0], X[:, 1], c=y, s=20, cmap=plt.cm.Spectral)
-plt.show()
+
+"""
+生成数据代码段 - 结束
+"""
+
