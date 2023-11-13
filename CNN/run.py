@@ -1,3 +1,5 @@
+import torch
+
 import Model
 import data
 import matplotlib.pyplot as plt
@@ -21,6 +23,7 @@ model = Model.LinearModel().to(device)
 size = 100
 dimension = 1
 x_train, y_train = data.gen_data(size, dimension, data.func_linear)
+print(x_train)
 
 # plt.scatter(x_train, y_train)
 # plt.xlabel("x")
@@ -39,13 +42,15 @@ how to establish an instance of dataset
 use TensorDataset !!!
 TensorDataset(x_train(tensor_version), y_train(tensor_version))                      
 '''
-train_loader = data.gen_dataloader(x_train, y_train)
+x_train_tensor = torch.tensor(x_train).float()
+y_train_tensor = torch.tensor(y_train).float()
+train_loader = data.gen_dataloader(x_train_tensor, y_train_tensor)
 
 # hyperparameter setting
 # learning rate
-lr = 1e-1  # 0.1
+lr = 0.01  # 0.1
 # epochs
-epochs = 100  # 100 times iteration
+epochs = 10  # 100 times iteration
 '''
 mean square error as loss function
 reduction based on the mean
@@ -68,4 +73,16 @@ for epoch in range(epochs):
     we established in the past
     '''
     for x_batch, y_batch in train_loader:
+        # 注意 此时 batch的运算已经在GPU上了
+        x_batch = x_batch.to(device)
+        y_batch = y_batch.to(device)
+        # clean the gradient list
+        optimiser.zero_grad()
+        # calculate prediction values
+        y_pred = model(x_batch)
+        loss = loss_fn(y_batch, y_pred)
+        loss.backward()
+        optimiser.step()
 
+print("优化后：")
+data.print_parameters(model)

@@ -43,10 +43,8 @@ def func_linear(x):
     return y_train
 
 
-def gen_dataloader(x_train, y_train):
-    x_train_tensor = torch.tensor(x_train)
-    y_train_tensor = torch.tensor(y_train)
-    '''
+def gen_dataloader(x_train_tensor, y_train_tensor):
+    """
     after we get the dataset, we may use mini-batch to improve the performance
     DataLoader can do this
     DataLoader(dataset=some_dataset,
@@ -55,10 +53,10 @@ def gen_dataloader(x_train, y_train):
                # shuffle - 是否打乱
     how to establish an instance of dataset
     use TensorDataset !!!
-    TensorDataset(x_train(tensor_version), y_train(tensor_version))                      
-    '''
+    TensorDataset(x_train(tensor_version), y_train(tensor_version))
+    """
     dataset = TensorDataset(x_train_tensor, y_train_tensor)
     train_loader = DataLoader(dataset=dataset,
-                              batch_size=16,
+                              batch_size=15,
                               shuffle=True)
     return train_loader
