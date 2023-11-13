@@ -64,6 +64,7 @@ plt.scatter(X[:, 0], X[:, 1], c=y, s=20, cmap=plt.cm.Spectral)
 """
 
 import Model
+import torch.optim as optim
 
 """
 准备数据
@@ -73,7 +74,25 @@ X_tensor = torch.tensor(X)
 sample_size = X_tensor.shape[0]
 X_tensor = X_tensor.unsqueeze(0)
 labels = y
-labels = torch.Tensor(labels)
+labels = torch.tensor(labels)
 labels = labels.unsqueeze(0)
 
+"""
+准备损失函数
+"""
+loss_fn = torch.nn.CrossEntropyLoss()
+classifier = Model.nnModel()
+optimiser = optim.SGD(classifier.parameters(), lr=0.01, momentum=0.9)
+batch_size = 1600
 
+for i in range(1000):
+    choice = np.random.choice(sample_size, batch_size, replace=False)
+    X_bychoice = X_tensor[0, choice, :]
+    labels_bychoice = labels[0, choice]
+    output = classifier(X_bychoice)
+    loss = loss_fn(output, labels_bychoice.long())
+    optimiser.zero_grad()
+    loss.backward()
+    if i % 100 == 0:
+        print(loss)
+    optimiser.step()
