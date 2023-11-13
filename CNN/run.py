@@ -1,6 +1,7 @@
 import Model
 import data
 import matplotlib.pyplot as plt
+import torch.optim as optim
 
 # check availability of GPU on your device
 device = data.mac_device_check()
@@ -26,3 +27,17 @@ x_train, y_train = data.gen_data(size, dimension, data.func_linear)
 # plt.ylabel("y")
 # plt.grid(True)
 # plt.show()
+
+# hyperparameter setting
+# learning rate
+lr = 1e-1  # 0.1
+# epochs
+epochs = 100  # 100 times iteration
+'''
+mean square error as loss function
+reduction based on the mean
+'''
+
+loss_fn = Model.nn.MSELoss(reduction='mean')
+
+

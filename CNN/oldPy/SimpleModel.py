@@ -93,7 +93,7 @@ print("参数 训练之前：\n {}".format(model.state_dict()))
 learning_rate = 1e-1  # 0.1
 epochs = 1000  # 训练数据循环次数
 loss_fn = nn.MSELoss(reduction='mean')
-# 损失函数 MSE 用均值
+# 损失函数 MSE.py 用均值
 optimiser = optim.SGD(model.parameters(), lr=learning_rate)
 # 使用SGD优化参数， lr-学习率是learning-rate, 提前设置好的
 # 这里SGD将会优化参数 a 和 b
