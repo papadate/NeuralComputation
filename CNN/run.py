@@ -59,5 +59,13 @@ print("优化前：")
 data.print_parameters(model)
 
 print("开始训练：")
-for epoch in range(epochs)
+for epoch in range(epochs):
+    # modify the model to training mode
     model.train()
+    # read each batch from dataloader
+    '''
+    train_loader is an instance
+    we established in the past
+    '''
+    for x_batch, y_batch in train_loader:
+
