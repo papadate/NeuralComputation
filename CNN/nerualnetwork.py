@@ -58,3 +58,8 @@ plt.scatter(X[:, 0], X[:, 1], c=y, s=20, cmap=plt.cm.Spectral)
 生成数据代码段 - 结束
 """
 
+"""
+模型代码 - 开始
+"""
+
+import Model
