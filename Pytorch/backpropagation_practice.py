@@ -39,6 +39,4 @@ print()
 for i in range(len):
     index = len - i
     print("梯度{}: {}".format(index, list[index-1].grad))
-
-
-
+print()
