@@ -22,3 +22,13 @@ print("方法如下：\n")
 
 # 我们使用GPU运算必须在支持GPU的情况下哈！ 用if分开
 if(torch.backends.mps.is_available()):
+    # 把torch_practice的变量数值，拿过来
+    print("我们用 .to('mps')， 设置计算将在GPU上发生")
+    print("用GPU计算之前一定要确保dtype是 float32 的")
+    print("numpy 可以通过 astype(np.float32)\n"
+          "torch 可以通过 .float() 把float64 转换成 float32")
+    numpy_matrix = torch_practice.numpy_matrix.astype(np.float32)
+    torch_matrix_1 = torch_practice.torch_matrix.float().to(device)
+    torch_matrix_2 = torch.from_numpy(numpy_matrix.copy()).to(device)
+    result = torch.add(torch_matrix_1, torch_matrix_2)
+    print(result)
