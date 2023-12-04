@@ -8,7 +8,7 @@ str = ("这是一个欢迎文件！"
        "‘env’文件夹是一个本地安装包虚拟环境")
 print(str)
 
-content = ["torch tutorial", "mps tutorial", "autograd tutorial"]
+content = ["torch tutorial", "mps tutorial", "autograd tutorial", "backpropagation practice"]
 len = len(content)
 nums = range(len)
 
@@ -27,11 +27,14 @@ def choice2():
     import mps_practice
 def choice3():
     import autograd
+def choice4():
+    import backpropagation_practice
 
 switch = {
     '1': choice1,
     '2': choice2,
-    '3': choice3
+    '3': choice3,
+    '4': choice4
 }
 
 user_input = []

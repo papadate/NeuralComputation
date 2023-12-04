@@ -8,8 +8,16 @@ matrix = torch.tensor([1.0, 2.0, 3.0, 4.0], requires_grad=True)
 print(matrix)
 
 
-#计算过程
+# 计算过程
 matrix_1 = matrix + 2
 # matrix_1.retain_grad()
 print(matrix_1)
+
+matrix_2 = matrix_1 * matrix_1 * 3
+print(matrix_2)
+
+result = matrix_2.mean()
+print(result)
+
+# 反向计算梯度
 
