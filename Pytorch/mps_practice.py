@@ -32,3 +32,4 @@ if torch.backends.mps.is_available():
     torch_matrix_2 = torch.from_numpy(numpy_matrix.copy()).to(device)
     result = torch.add(torch_matrix_1, torch_matrix_2)
     print(result)
+    print("计算使用：", result.device, '\n')
