@@ -17,3 +17,22 @@ list = [3, 4.5]
 matrix = torch.tensor(list)
 print(matrix)
 print("matrix's size is :", matrix.shape, "\n")
+
+
+print("我们也可以对tensor进行计算操作")
+A = torch.rand(3,4)
+B = torch.rand(3,4)
+print("A + B:")
+print(A + B, "\n")
+
+print("A - B:")
+print(A - B, "\n")
+
+print("torch.add(A, B), 这个代码也可以让两个tensor矩阵相加\m")
+
+print("result 矩阵 是一个用来承接输出的矩阵， 尺寸根据输入矩阵的尺寸定制的")
+print("result = torch.empty(A.shape)")
+result = torch.empty(A.shape)
+torch.add(A, B, out=result)
+print("result 矩阵结果：")
+print(result)
