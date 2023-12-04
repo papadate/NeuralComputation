@@ -20,4 +20,5 @@ print("检测后：", device, '\n')
 print("当我们发现设备GPU可用后，我们要把torch的tensor矩阵挪到GPU上计算")
 print("方法如下：\n")
 
-if(torch.)
+# 我们使用GPU运算必须在支持GPU的情况下哈！ 用if分开
+if(torch.backends.mps.is_available()):
