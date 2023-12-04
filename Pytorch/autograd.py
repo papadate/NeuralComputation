@@ -50,7 +50,11 @@ print("此后的任何新的计算都没有梯度追踪")
 matrix_test = matrix * matrix
 print()
 print(matrix_test)
-print("^^ 此时，你会发现计算出的新tensor矩阵没有梯度追踪记录了！")
+print("^^ 此时，你会发现计算出的新tensor矩阵没有梯度追踪记录了！\n")
 
 print("创建新的tensor时， 默认的grad_fn 属性时False， 你也可以后期修改")
 example = torch.randn(2, 2)
+print(example.requires_grad)
+print("使用 .requires_grad_(True) 来对tensor的追踪需求急性更改")
+example.requires_grad_(True)
+print(example.requires_grad)
