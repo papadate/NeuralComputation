@@ -30,9 +30,21 @@ print(A - B, "\n")
 
 print("torch.add(A, B), 这个代码也可以让两个tensor矩阵相加\m")
 
-print("result 矩阵 是一个用来承接输出的矩阵， 尺寸根据输入矩阵的尺寸定制的")
 print("result = torch.empty(A.shape)")
+print("result 矩阵 是一个用来承接输出的矩阵， 尺寸根据输入矩阵的尺寸定制的")
 result = torch.empty(A.shape)
 torch.add(A, B, out=result)
 print("result 矩阵结果：")
 print(result)
+
+print("matrix = torch.ones(5)")
+print("torch.ones('row, col' or 'col') 用来创建一个全是1的tensor矩阵")
+matrix = torch.ones(5)
+print(matrix)
+print(matrix.dtype, '\n')
+
+print("目前matrix 是一个 tensor (torch内) 矩阵，\n"
+      "他可以通过 matrix.numpy() 转换回numpy 矩阵")
+numpy_matrix = matrix.numpy()
+print(numpy_matrix)
+print(numpy_matrix.dtype)
