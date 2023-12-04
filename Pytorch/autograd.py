@@ -45,6 +45,11 @@ display_grad_fn(list)
 matrix.requires_grad_(False)
 print("matrix.requires_grad_(False)")
 print("这个操作，将会把matrix设置为不记录计算更新")
+print("此后的任何新的计算都没有梯度追踪")
 
+matrix_test = matrix * matrix
+print()
+print(matrix_test)
+print("^^ 此时，你会发现计算出的新tensor矩阵没有梯度追踪记录了！")
 
 print()
