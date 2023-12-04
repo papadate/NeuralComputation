@@ -11,7 +11,7 @@ print("如果torch.backends.mps.is_available()检测为True")
 print("设置 device = 'mps")
 print("如果torch.backends.mps.is_available()检测为False")
 print("设置 device = 'cpu, 因为你的电脑没有可用GPU")
-if (torch.backends.mps.is_available()):
+if torch.backends.mps.is_available():
     device = 'mps'
 else:
     device = 'cpu'
@@ -21,7 +21,7 @@ print("当我们发现设备GPU可用后，我们要把torch的tensor矩阵挪�
 print("方法如下：\n")
 
 # 我们使用GPU运算必须在支持GPU的情况下哈！ 用if分开
-if(torch.backends.mps.is_available()):
+if torch.backends.mps.is_available():
     # 把torch_practice的变量数值，拿过来
     print("我们用 .to('mps')， 设置计算将在GPU上发生")
     print("用GPU计算之前一定要确保dtype是 float32 的")
