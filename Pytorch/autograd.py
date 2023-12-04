@@ -52,4 +52,5 @@ print()
 print(matrix_test)
 print("^^ 此时，你会发现计算出的新tensor矩阵没有梯度追踪记录了！")
 
-print()
+print("创建新的tensor时， 默认的grad_fn 属性时False， 你也可以后期修改")
+example = torch.randn(2, 2)
