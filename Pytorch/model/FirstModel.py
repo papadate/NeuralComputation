@@ -75,3 +75,12 @@ training(model, device)
 # 训练结束
 print("训练后 参数为：")
 display(model)
+
+choice = input("是否需要画图？[yes] or [no]\n")
+if choice == 'yes':
+    import model.resource.plot as plot
+    tensor_prediction = model(dataset.gen()[0].to(device))
+    numpy_prediction = tensor_prediction.detach().to('cpu').numpy()
+    plot.draw(numpy_prediction, dataset.gen())
+
+
