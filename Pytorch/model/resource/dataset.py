@@ -14,3 +14,18 @@ print("打乱数组前：\n", index, '\n')
 print("打乱数组中... ...\n")
 np.random.shuffle(index)
 print("打乱数组后： \n", index, '\n')
+
+# 分割 数据集： 0～79 training data / 80～99 validation data
+train = index[:80]  # 提取0～79 不包括第80位
+val = index[80:]  # 提取80～99 知道index数组末尾截止
+
+print("分配中... ...")
+x_train, y_train = data_x[train], data_y[train]
+x_val, y_val = data_x[val], data_y[val]
+
+sets = [x_train, y_train, x_val, y_val]
+content = ["输入训练集", "输出训练集", "输入验证集", "输出验证集"]
+for i in range(2):
+    print("{} 数量为：{}".format(content[i * 2], sets[i * 2].size))
+    print("{} 数量为：{}".format(content[(i * 2) + 1], sets[(i * 2) + 1].size))
+
