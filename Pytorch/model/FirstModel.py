@@ -12,6 +12,9 @@ class FirstModel(torch.nn.Module):
         # formula: W * X + b
         return (self.w * x) + self.b
 
+def display(model):
+    for name, amount in model.state_dict().items():
+        print("参数{} -> 数值：{}".format(name, amount))
 
 import torch.optim as optim
 import model.resource.mps_checker as checker
@@ -24,3 +27,6 @@ model = checker.check(FirstModel())
 print("分析模型参数：")
 for i in iter(model.parameters()):
     print(i)
+
+print("为训练前 参数为：")
+display(model)
