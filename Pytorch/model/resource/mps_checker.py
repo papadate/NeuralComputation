@@ -6,8 +6,8 @@ def check(modelClass):
         device = "mps"
         print("检测到计算机可以使用：{}\n".format(device))
         model = modelClass.to(device)
-        return model
+        return model, device
     else:
         print("检测到计算机仅有CPU")
         model = modelClass
-        return model
+        return model, 'cpu'

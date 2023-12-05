@@ -5,7 +5,7 @@ timer = 0
 models.append("FirstModel")
 
 def choice1():
-    import FirstModel
+    import model.FirstModel
 
 switch = {
     '1': choice1

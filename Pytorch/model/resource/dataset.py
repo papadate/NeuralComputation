@@ -12,10 +12,10 @@ def gen():
     data_y = 1 + 2 * data_x + 0.1 * np.random.randn(100, 1)
 
     index = np.arange(100)
-    print("打乱数组前：\n", index, '\n')
+    # print("打乱数组前：\n", index, '\n')
     print("打乱数组中... ...\n")
     np.random.shuffle(index)
-    print("打乱数组后： \n", index, '\n')
+    # print("打乱数组后： \n", index, '\n')
 
     # 分割 数据集： 0～79 training data / 80～99 validation data
     train = index[:80]  # 提取0～79 不包括第80位
@@ -36,7 +36,8 @@ def gen():
     torch_sets = []
     for i in range(4):
         torch_sets.append(torch.from_numpy(sets[i]).float())
-        print(torch_sets[i])
-        print(torch_sets[i].dtype, "\n")
+        # print(torch_sets[i])
+        # print(torch_sets[i].dtype, "\n")
+    print('\n')
 
     return torch_sets
