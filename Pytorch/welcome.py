@@ -1,3 +1,7 @@
+
+import torch_practice
+import model.modelList as modelList
+
 # 这是一个示例 Python 脚本。
 
 # 按 ⌃R 执行或将其替换为您的代码。
@@ -22,7 +26,7 @@ def display():
 
 
 def choice1():
-    import torch_practice
+    torch_practice.run()
 
 
 def choice2():
@@ -37,7 +41,7 @@ def choice4():
     import backpropagation_practice
 
 def choice5():
-    import model.modelList
+    modelList.run()
 
 
 switch = {
@@ -53,6 +57,7 @@ timer = 0
 while True:
     display()
     user_input.append(input())
+    print("用户输入记录", user_input, '\n')
     if user_input[timer] == '0':
         break
     switch.get(user_input[timer], lambda: print("输入无效"))()

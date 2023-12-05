@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 
-def draw(prediction, torch_set):
+def draw_pots_line(prediction, torch_set):
     print('正在画图...')
     x_train = torch_set[0].numpy()
     y_train = torch_set[1].numpy()
