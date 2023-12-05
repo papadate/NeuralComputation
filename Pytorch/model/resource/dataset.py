@@ -29,3 +29,10 @@ for i in range(2):
     print("{} 数量为：{}".format(content[i * 2], sets[i * 2].size))
     print("{} 数量为：{}".format(content[(i * 2) + 1], sets[(i * 2) + 1].size))
 
+# 转换 numpy矩阵 -> tensor矩阵
+# 注意！在输入进神经网络时，数据需保持为 float32 格式， 使用 .float() 方法来转换
+torch_sets = []
+for i in range(4):
+    torch_sets.append(torch.from_numpy(sets[i]).float())
+    print(torch_sets[i])
+    print(torch_sets[i].dtype, "\n")
