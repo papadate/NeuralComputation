@@ -3,7 +3,12 @@ names = []
 user_input = []
 timer = 0
 
-switch
+def choice1():
+    import FirstModel
+
+switch = {
+    '1': choice1
+}
 
 while True:
     print("请选择需要运行的模型")
@@ -15,3 +20,5 @@ while True:
     # 断开程序
     if user_input[timer] == '0':
         break
+    switch.get(user_input[timer], lambda: print("输入无效"))()
+    timer += 1
