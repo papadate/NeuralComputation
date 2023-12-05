@@ -1,5 +1,7 @@
-
 import torch_practice
+import mps_practice
+import autograd
+import backpropagation_practice
 import model.modelList as modelList
 
 # 这是一个示例 Python 脚本。
@@ -30,15 +32,15 @@ def choice1():
 
 
 def choice2():
-    import mps_practice
+    mps_practice.run()
 
 
 def choice3():
-    import autograd
+    autograd.run()
 
 
 def choice4():
-    import backpropagation_practice
+    backpropagation_practice.run()
 
 def choice5():
     modelList.run()
@@ -57,8 +59,8 @@ timer = 0
 while True:
     display()
     user_input.append(input())
-    print("用户输入记录", user_input, '\n')
     if user_input[timer] == '0':
         break
     switch.get(user_input[timer], lambda: print("输入无效"))()
     timer += 1
+    print("用户输入记录", user_input, '\n')

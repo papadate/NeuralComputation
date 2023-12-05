@@ -100,3 +100,28 @@ def run():
     np.add(numpy_matrix, 1, out=numpy_matrix)
     print(numpy_matrix)
     print(torch_matrix, '\n')
+
+def collector():
+    # import packages
+    import numpy as np
+    import torch
+
+    matrix = torch.rand(3, 4)
+    list = [3, 4.5]
+    matrix = torch.tensor(list)
+    A = torch.rand(3, 4)
+    B = torch.rand(3, 4)
+    result = torch.empty(A.shape)
+    torch.add(A, B, out=result)
+    matrix = torch.ones(5)
+    numpy_matrix = matrix.numpy()
+    numpy_matrix = np.ones(10)
+    torch_matrix = torch.from_numpy(numpy_matrix)
+    np.add(numpy_matrix, 1, out=numpy_matrix)
+
+    numpy_matrix = np.add(numpy_matrix, 1)
+    torch_matrix = torch.from_numpy(numpy_matrix)
+    numpy_matrix = np.ones((10, 10))
+    torch_matrix = torch.from_numpy(numpy_matrix.copy())
+    np.add(numpy_matrix, 1, out=numpy_matrix)
+    return numpy_matrix, torch_matrix

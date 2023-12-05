@@ -1,4 +1,6 @@
 def run():
+    import model.FirstModel as FirstModel
+
     models = []
     user_input = []
     timer = 0
@@ -6,7 +8,7 @@ def run():
     models.append("FirstModel")
 
     def choice1():
-        import model.FirstModel
+        FirstModel.run()
 
     switch = {
         '1': choice1
