@@ -8,3 +8,9 @@ data_x = np.random.rand(100, 1)
 # 生成 对应输出 y 的值
 # 公式：y = b(b=1) + w(w=2) * x + (noise)
 data_y = 1 + 2 * data_x + 0.1 * np.random.randn(100, 1)
+
+index = np.arange(100)
+print("打乱数组前：\n", index, '\n')
+print("打乱数组中... ...\n")
+np.random.shuffle(index)
+print("打乱数组后： \n", index, '\n')
