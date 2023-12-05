@@ -1,4 +1,7 @@
 import torch
+import torch.optim as optim
+import model.resource.mps_checker as checker
+import model.resource.dataset as dataset
 
 
 class FirstModel(torch.nn.Module):
@@ -16,8 +19,28 @@ def display(model):
     for name, amount in model.state_dict().items():
         print("参数{} -> 数值：{}".format(name, amount))
 
-import torch.optim as optim
-import model.resource.mps_checker as checker
+def training(model):
+    # 设置超参数：
+    # 学习率
+    learning_rate = 1e-1  # 0.1
+    # 设置循环整个训练集的次数
+    epochs = 100
+    # 去平均MSE损失
+    loss_fn = torch.nn.MSELoss(reduction='mean')
+    # 使用SGD优化参数
+    optimiser = optim.SGD(model.parameters(), lr=learning_rate)
+
+    # 准备数据
+    torch_sets = da
+
+    # 开始循环
+    for epoch in range(epochs):
+        # 设置为训练模式 dropout / batch-normalization
+        model.train()
+        # 防止梯度累计， 清空上一次操作的梯度记录
+        optimiser.zero_grad()
+        Y_prediction = model()
+
 
 torch.manual_seed(42)
 
@@ -30,3 +53,6 @@ for i in iter(model.parameters()):
 
 print("为训练前 参数为：")
 display(model)
+
+# 训练模型
+training(model)
