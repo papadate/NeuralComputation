@@ -14,21 +14,28 @@ nums = range(len)
 
 
 def display():
-    str = "数字键 0 -> 离开"
-    print(str)
+    inner_str = "数字键 0 -> 离开"
+    print(inner_str)
     for i in range(len):
-        str = "数字键 {} -> 内容: {}".format(nums[i] + 1, content[i])
-        print(str)
+        inner_str = "数字键 {} -> 内容: {}".format(nums[i] + 1, content[i])
+        print(inner_str)
 
 
 def choice1():
     import torch_practice
+
+
 def choice2():
     import mps_practice
+
+
 def choice3():
     import autograd
+
+
 def choice4():
     import backpropagation_practice
+
 
 switch = {
     '1': choice1,
