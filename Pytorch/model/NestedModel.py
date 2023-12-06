@@ -79,6 +79,27 @@ def train1(model, train_loader, device, torch_set):
         # 这样承接这个generic_code函数里的train_step的变量就会是这个方法
         return train_step
 
+    def train2(model, train_loader, device, torch_set):
+        print("初始训练方法进行中... ...")
+        print("训练前参数为：")
+        display(model)
+
+        # 设置超参数
+        learning_rate = 1e-1
+        epochs = 100
+        loss_fn = nn.MSELoss(reduction='mean')
+        optimiser = optim.SGD(model.parameters(), lr=learning_rate)
+
+        train_step = generic_code(model, loss_fn, optimiser)
+
+        losses = []
+        for epoch in range(epochs):
+            for x_batch, y_batch in train_loader:
+                losses.append(train_step(x_batch, y_batch))
+
+        print("训练结束！")
+        display(model)
+
 
 def run():
     import model.resource.dataset as dataset
