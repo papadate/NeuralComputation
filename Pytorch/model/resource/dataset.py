@@ -94,4 +94,6 @@ def gen_classification():
         y[X_singleClass] = i
 
     # 绘制样本图像
-    plot.draw_class(X, y)
+    # plot.draw_class(X, y)
+
+    return X, y

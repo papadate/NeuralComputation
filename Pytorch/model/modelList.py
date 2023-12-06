@@ -1,13 +1,15 @@
 def run():
     import model.FirstModel as FirstModel
     import model.NestedModel as NestedModel
+    import model.ClassificationModel as ClassificationModel
 
     models = []
     user_input = []
     timer = 0
 
-    models.append("FirstModel")
-    models.append("NestedModel")
+    models.append("First Model")
+    models.append("Nested Model")
+    models.append("Classification Model")
 
     def choice1():
         FirstModel.run()
@@ -15,9 +17,13 @@ def run():
     def choice2():
         NestedModel.run()
 
+    def choice3():
+        ClassificationModel.run()
+
     switch = {
         '1': choice1,
-        '2': choice2
+        '2': choice2,
+        '3': choice3
     }
 
     while True:
