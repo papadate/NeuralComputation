@@ -88,7 +88,7 @@ def train2(model, train_loader, device, torch_set):
     display(model)
 
     # 设置超参数
-    learning_rate = 1e-1
+    learning_rate = 0.1
     epochs = 100
     loss_fn = nn.MSELoss(reduction='mean')
     optimiser = optim.SGD(model.parameters(), lr=learning_rate)
@@ -98,6 +98,8 @@ def train2(model, train_loader, device, torch_set):
     losses = []
     for epoch in range(epochs):
         for x_batch, y_batch in train_loader:
+            x_batch = x_batch.to(device)
+            y_batch = y_batch.to(device)
             losses.append(train_step(x_batch, y_batch))
 
     print("训练结束！")
@@ -109,6 +111,8 @@ def train2(model, train_loader, device, torch_set):
         tensor_prediction = model(torch_set[0].to(device))
         numpy_prediction = tensor_prediction.detach().to('cpu').numpy()
         plot.draw_pots_line(numpy_prediction, torch_set)
+
+        plot.draw_losses(losses)
 
 
 def run():
