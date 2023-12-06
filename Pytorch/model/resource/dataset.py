@@ -1,6 +1,7 @@
 import numpy as np
 import torch
 import math
+import model.resource.plot as plot
 
 
 def gen_regression():
@@ -82,3 +83,15 @@ def gen_classification():
         0 0.25 0.50 0.75 1
         '''
         radius = np.linspace(0.0, 1, pointsPerClass)
+
+        # 设置角度
+        #                   给每个样本一个角度                       干扰值
+        theta = np.linspace(i * 4, (i + 1) * 4, pointsPerClass) + np.random.randn(pointsPerClass) * 0.2
+
+        # 组合 sin cos函数 为 x 样本的两个特征
+        X[X_singleClass] = np.c_[radius * np.sin(theta), radius * np.cos(theta)]
+        # 设置 正确标签
+        y[X_singleClass] = i
+
+    # 绘制样本图像
+    plot.draw_class(X, y)

@@ -18,3 +18,9 @@ def draw_losses(losses):
     plt.grid(True)
     plt.legend()
     plt.show()
+
+
+def draw_class(x, y):
+    print("正在画图...")
+    plt.scatter(x[:, 0], x[:, 1], c=y, s=40, cmap=plt.cm.Spectral)
+    plt.show()
