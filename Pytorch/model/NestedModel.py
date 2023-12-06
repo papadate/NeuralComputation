@@ -63,21 +63,23 @@ def train1(model, train_loader, device, torch_set):
         plot.draw_pots_line(numpy_prediction, torch_set)
 
     # 需要提供模型 损失函数 优化器 来建立一个通用型训练过程方法！
-    def generic_code(model, loss_fn, optimiser):
-        # 内建一个函数，代替了每一次训练的过程，直接用一个方法代表每次循环一大串过程
-        def train_step(x_batch, y_batch):
-            # 寻常训练步骤
-            optimiser.zero_grad()
-            y_prediction = model(x_batch)
-            loss = loss_fn(y_batch, y_prediction)
-            loss.backward()
-            optimiser.step()
-            # loss.item() 可以把tensor版本的loss值提取成一个正常标量
-            return loss.item()
 
-        # 返回这个方法
-        # 这样承接这个generic_code函数里的train_step的变量就会是这个方法
-        return train_step
+
+def generic_code(model, loss_fn, optimiser):
+    # 内建一个函数，代替了每一次训练的过程，直接用一个方法代表每次循环一大串过程
+    def train_step(x_batch, y_batch):
+        # 寻常训练步骤
+        optimiser.zero_grad()
+        y_prediction = model(x_batch)
+        loss = loss_fn(y_batch, y_prediction)
+        loss.backward()
+        optimiser.step()
+        # loss.item() 可以把tensor版本的loss值提取成一个正常标量
+        return loss.item()
+
+    # 返回这个方法
+    # 这样承接这个generic_code函数里的train_step的变量就会是这个方法
+    return train_step
 
 
 def train2(model, train_loader, device, torch_set):
