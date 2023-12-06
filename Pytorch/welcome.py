@@ -52,8 +52,8 @@ def choice4():
 def choice5():
     modelList.run()
 
-def choice6(0):
-
+def choice6():
+    test.run()
 
 
 switch = {
