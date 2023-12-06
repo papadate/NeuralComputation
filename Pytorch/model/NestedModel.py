@@ -3,7 +3,6 @@ import torch.nn as nn
 import torch.optim as optim
 
 
-
 # 创建一个模型类
 class LinearModel(nn.Module):
     def __init__(self):
@@ -75,30 +74,39 @@ def train1(model, train_loader, device, torch_set):
             optimiser.step()
             # loss.item() 可以把tensor版本的loss值提取成一个正常标量
             return loss.item()
+
         # 返回这个方法
         # 这样承接这个generic_code函数里的train_step的变量就会是这个方法
         return train_step
 
-    def train2(model, train_loader, device, torch_set):
-        print("初始训练方法进行中... ...")
-        print("训练前参数为：")
-        display(model)
 
-        # 设置超参数
-        learning_rate = 1e-1
-        epochs = 100
-        loss_fn = nn.MSELoss(reduction='mean')
-        optimiser = optim.SGD(model.parameters(), lr=learning_rate)
+def train2(model, train_loader, device, torch_set):
+    print("初始训练方法进行中... ...")
+    print("训练前参数为：")
+    display(model)
 
-        train_step = generic_code(model, loss_fn, optimiser)
+    # 设置超参数
+    learning_rate = 1e-1
+    epochs = 100
+    loss_fn = nn.MSELoss(reduction='mean')
+    optimiser = optim.SGD(model.parameters(), lr=learning_rate)
 
-        losses = []
-        for epoch in range(epochs):
-            for x_batch, y_batch in train_loader:
-                losses.append(train_step(x_batch, y_batch))
+    train_step = generic_code(model, loss_fn, optimiser)
 
-        print("训练结束！")
-        display(model)
+    losses = []
+    for epoch in range(epochs):
+        for x_batch, y_batch in train_loader:
+            losses.append(train_step(x_batch, y_batch))
+
+    print("训练结束！")
+    display(model)
+
+    choice = input("是否需要画图？[yes] or [no]\n")
+    if choice == 'yes':
+        import model.resource.plot as plot
+        tensor_prediction = model(torch_set[0].to(device))
+        numpy_prediction = tensor_prediction.detach().to('cpu').numpy()
+        plot.draw_pots_line(numpy_prediction, torch_set)
 
 
 def run():
@@ -122,4 +130,4 @@ def run():
     if choice == '1':
         train1(model, train_loader, device, torch_set)
     else:
-        train2()
+        train2(model, train_loader, device, torch_set)
