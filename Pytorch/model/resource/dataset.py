@@ -76,7 +76,9 @@ def gen_classification():
         0.0 起点
         1 终点
         中间平均分割 pointsPerClass 份
-        0～1 平均分！
+        0～1 
+        比如分出 5 个数
+        1 2    3    4    5
+        0 0.25 0.50 0.75 1
         '''
         radius = np.linspace(0.0, 1, pointsPerClass)
-        print(radius)
