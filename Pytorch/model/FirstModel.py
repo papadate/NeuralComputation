@@ -38,7 +38,7 @@ def run():
         2 -> x_val
         3 -> y_val
         '''
-        torch_sets = dataset.gen()
+        torch_sets = dataset.gen_regression()
 
         # 开始循环
         for epoch in range(epochs):
@@ -76,6 +76,6 @@ def run():
     choice = input("是否需要画图？[yes] or [no]\n")
     if choice == 'yes':
         import model.resource.plot as plot
-        tensor_prediction = model(dataset.gen()[0].to(device))
+        tensor_prediction = model(dataset.gen_regression()[0].to(device))
         numpy_prediction = tensor_prediction.detach().to('cpu').numpy()
-        plot.draw_pots_line(numpy_prediction, dataset.gen())
+        plot.draw_pots_line(numpy_prediction, dataset.gen_regression())

@@ -123,7 +123,7 @@ def run():
     model, device = checker.check(LinearModel())
 
     # 数据准备阶段
-    torch_set = dataset.gen()
+    torch_set = dataset.gen_regression()
 
     from torch.utils.data import TensorDataset, DataLoader
 

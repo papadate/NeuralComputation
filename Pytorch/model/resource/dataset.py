@@ -1,8 +1,9 @@
 import numpy as np
 import torch
+import math
 
 
-def gen():
+def gen_regression():
     # 固定随机种子
     np.random.seed(42)
     # 因为前面已经固定了随机种子，所以随机出来的数值永远每次执行任务都是一致的
@@ -41,3 +42,20 @@ def gen():
     print('\n')
 
     return torch_sets
+
+def gen_classification():
+    # 每个类点的数量
+    pointsPerClass = 400
+    # 每个样本数据的特征维度
+    dimension = 2
+    # 类的数量
+    numberOfClass = 4
+
+    # 设置 输入数据矩阵
+    # 矩阵尺寸：    (行，                             列)
+    #              >> 每个类多少个点 * 多少个类        >> 每个样本的特征维度
+    X = np.zeros(((pointsPerClass * numberOfClass), dimension))
+    # 设置 输出数据矩阵
+    # 每个样本的输出 对应着 他所在的类
+    # uint8 是一个 0 - 255  的正整数类型
+    y = np.zeros((pointsPerClass * numberOfClass), dtype='uint8')
