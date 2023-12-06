@@ -43,6 +43,7 @@ def gen_regression():
 
     return torch_sets
 
+
 def gen_classification():
     # 每个类点的数量
     pointsPerClass = 400
@@ -59,3 +60,22 @@ def gen_classification():
     # 每个样本的输出 对应着 他所在的类
     # uint8 是一个 0 - 255  的正整数类型
     y = np.zeros((pointsPerClass * numberOfClass), dtype='uint8')
+
+    # 循环每个类 设置x y
+    for i in range(numberOfClass):
+        '''
+        0 -> 0 - 399
+        1 -> 400 - 799
+        ... ...
+        '''
+        X_singleClass = range(pointsPerClass* (i), pointsPerClass * (i+1))
+
+        # 设置半径
+        '''
+        np.linspace()
+        0.0 起点
+        1 终点
+        中间平均分割 pointsPerClass 份
+        0～1 平均分！
+        '''
+        radius = np.linspace(0.0, 1, pointsPerClass)
