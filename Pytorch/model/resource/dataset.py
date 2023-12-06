@@ -79,3 +79,4 @@ def gen_classification():
         0～1 平均分！
         '''
         radius = np.linspace(0.0, 1, pointsPerClass)
+        print(radius)

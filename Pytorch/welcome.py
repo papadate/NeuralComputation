@@ -3,6 +3,7 @@ import mps_practice
 import autograd
 import backpropagation_practice
 import model.modelList as modelList
+import model.resource.test as test
 
 # 这是一个示例 Python 脚本。
 
@@ -14,7 +15,12 @@ str = ("这是一个欢迎文件！"
        "‘env’文件夹是一个本地安装包虚拟环境")
 print(str)
 
-content = ["torch tutorial", "mps tutorial", "autograd tutorial", "backpropagation practice", "model selection"]
+content = ["torch tutorial",
+           "mps tutorial",
+           "autograd tutorial",
+           "backpropagation practice",
+           "model selection",
+           "test program"]
 len = len(content)
 nums = range(len)
 
@@ -46,13 +52,17 @@ def choice4():
 def choice5():
     modelList.run()
 
+def choice6(0):
+
+
 
 switch = {
     '1': choice1,
     '2': choice2,
     '3': choice3,
     '4': choice4,
-    '5': choice5
+    '5': choice5,
+    '6': choice6  # 测试
 }
 
 user_input = []
