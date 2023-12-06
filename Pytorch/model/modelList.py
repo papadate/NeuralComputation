@@ -1,17 +1,23 @@
 def run():
     import model.FirstModel as FirstModel
+    import model.NestedModel as NestedModel
 
     models = []
     user_input = []
     timer = 0
 
     models.append("FirstModel")
+    models.append("NestedModel")
 
     def choice1():
         FirstModel.run()
 
+    def choice2():
+        NestedModel.run()
+
     switch = {
-        '1': choice1
+        '1': choice1,
+        '2': choice2
     }
 
     while True:
