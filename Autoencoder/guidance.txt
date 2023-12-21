@@ -1,0 +1,7 @@
+提示信息：
+1. 因为auto encoder 需要预装提供的工具包
+	请使用autoencoder.zip内提供的代码文件
+2. 注意，当你使用自己的python环境时，需要自己pip安装并部署一些使用到的库
+3. 运行时，如提出警告 urllib3 当前版本过高时，
+	pip install urllib3==1.26.8
+	使用这个代码让 urllib3 的版本降低
