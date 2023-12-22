@@ -45,5 +45,8 @@ print(np.unique(sets[1]))
 print('测试集内 类别为: ')
 print(np.unique(sets[3]))
 
-plot_grid_of_images(train_images[0:900], n_imgs_per_row=30)
+i = 100
+plot_grid_of_images(train_images[i:i+900], n_imgs_per_row=30)
 plt.show()
+
+train_images_flat = train_images.reshape([train_images.shape[0], -1])
