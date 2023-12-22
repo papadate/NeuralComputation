@@ -49,4 +49,10 @@ i = 100
 plot_grid_of_images(train_images[i:i+900], n_imgs_per_row=30)
 plt.show()
 
+# 此步操作，是用来把2D矩阵拉直变成1D向量
 train_images_flat = train_images.reshape([train_images.shape[0], -1])
+test_images_flat = test_images.reshape([test_images.shape[0], -1])
+
+print("numpy array 前后变化：")
+print('1 -> {}'.format(train_images.shape))
+print('2 -> {}'.format(train_images_flat.shape))
